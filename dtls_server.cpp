@@ -35,6 +35,12 @@ int main() {
     const SSL_METHOD *method = DTLS_server_method();
     printf("4\n");
     SSL_CTX *ctx = SSL_CTX_new(method);
+    printf("SSL_CTX address: %p\n", (void *)ctx);
+    if (ctx == NULL) {
+      fprintf(stderr, "SSL_CTX 생성 실패:\n");
+      ERR_print_errors_fp(stderr);
+      return -1;
+    }
     printf("5\n");
 
     SSL_CTX_set_msg_callback(ctx, message_callback);
