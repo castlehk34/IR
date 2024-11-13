@@ -32,10 +32,10 @@ int main() {
     printf("6\n");
     
     // 포스트 퀀텀 알고리즘 설정
-    // SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
-    // printf("7\n");
-    // SSL_CTX_set1_groups_list(ctx, "dilithium2");
-    // printf("8\n");
+    SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
+    printf("7\n");
+    SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    printf("8\n");
     
     
 
