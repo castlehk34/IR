@@ -30,6 +30,7 @@ int main() {
     printf("5\n");
     SSL_CTX_set_max_proto_version(ctx, TLS1_3_VERSION);
     printf("6\n");
+    printf("SSL_CTX address: %p\n", (void *)ctx);
     
     // 포스트 퀀텀 알고리즘 설정
     SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
