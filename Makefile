@@ -2,9 +2,9 @@ CC=g++
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 
-CPPFLAGS=-I/opt/homebrew/Cellar/liboqs/0.11.0/include -I/opt/homebrew/opt/openssl@3.3/include -Iliboqs/build/include
+CPPFLAGS=-I../openssl/include
 
-LDFLAGS=-L/opt/homebrew/Cellar/liboqs/0.11.0/lib -L/opt/homebrew/opt/openssl@3.3/lib -L../liboqs/lib -lssl -lcrypto -loqs 
+LDFLAGS=-L -lssl -lcrypto 
 
 all: tls_server tls_client dtls_server dtls_client
 
