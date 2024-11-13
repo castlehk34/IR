@@ -4,7 +4,7 @@ OBJS=$(SRCS:.cpp=.o)
 
 CPPFLAGS=-I../openssl/include
 
-LDFLAGS=-L -lssl -lcrypto 
+LDFLAGS=-L../openssl -lssl -lcrypto 
 
 all: tls_server tls_client dtls_server dtls_client
 
