@@ -22,16 +22,22 @@ int main() {
 
 
     // TLS 서버 메서드 사용
-    const SSL_METHOD *method = TLS_server_method();
+    // const SSL_METHOD *method = TLS_server_method();
+    // printf("5\n");
+    // SSL_CTX *ctx = SSL_CTX_new(method);
+    // printf("6\n");
+    SSL_CTX* ctx = SSL_CTX_new(SSLv23_client_method());
     printf("5\n");
-    SSL_CTX *ctx = SSL_CTX_new(method);
+    SSL_CTX_set_max_proto_version(ctx, TLS1_3_VERSION);
     printf("6\n");
-
+    
     // 포스트 퀀텀 알고리즘 설정
-    SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
-    printf("7\n");
-    SSL_CTX_set1_groups_list(ctx, "dilithium2");
-    printf("8\n");
+    // SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
+    // printf("7\n");
+    // SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    // printf("8\n");
+    
+    
 
     // 인증서와 개인 키 파일 로드 및 유효성 검사
     if (SSL_CTX_use_certificate_file(ctx, "dil2_crt.pem", SSL_FILETYPE_PEM) <= 0) {
