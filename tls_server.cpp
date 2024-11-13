@@ -12,18 +12,26 @@ struct timeval send_time, recv_time;
 
 int main() {
     // OpenSSL 라이브러리 초기화
+    printf("1\n");
     SSL_library_init();
+    printf("2\n");
     OpenSSL_add_all_algorithms();
+    printf("3\n");
     SSL_load_error_strings();
+    printf("4\n");
 
 
     // TLS 서버 메서드 사용
     const SSL_METHOD *method = TLS_server_method();
+    printf("5\n");
     SSL_CTX *ctx = SSL_CTX_new(method);
+    printf("6\n");
 
     // 포스트 퀀텀 알고리즘 설정
     SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); 
+    printf("7\n");
     SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    printf("8\n");
 
     // 인증서와 개인 키 파일 로드 및 유효성 검사
     if (SSL_CTX_use_certificate_file(ctx, "dil2_crt.pem", SSL_FILETYPE_PEM) <= 0) {
