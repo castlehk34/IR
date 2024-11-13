@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-#include <oqs/oqs.h>
+// #include <oqs/oqs.h>
 
 struct timeval s, e;
 struct timeval send_time, recv_time;
