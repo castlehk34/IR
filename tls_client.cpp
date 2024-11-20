@@ -24,7 +24,7 @@ int main() {
     SSL_load_error_strings();
 
     // TLS 클라이언트 메서드 사용
-    SSL_CTX *ctx = create_context(SSLv23_client_method());
+    SSL_CTX *ctx = create_context();
     printf("a\n");
     SSL_CTX_load_verify_locations(ctx, "./dil2_crt.pem", NULL);
     printf("b\n");
