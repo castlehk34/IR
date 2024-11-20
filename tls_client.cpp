@@ -17,14 +17,20 @@ int main() {
     SSL_load_error_strings();
 
     // TLS 클라이언트 메서드 사용
-    const SSL_METHOD *method = TLS_client_method();
-    SSL_CTX *ctx = SSL_CTX_new(method);
+    SSL_CTX *ctx = create_context(SSLv23_client_method());
+    printf("a\n");
+    SSL_CTX_load_verify_locations(ctx, "./dil2_crt.pem", NULL);
+    printf("b\n");
+    SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL); // SSL_VERIFY_NONE
+    printf("c\n");
+	SSL_CTX_set_min_proto_version(ctx, TLS1_3_VERSION);
+    printf("d\n");
 
 
     
     // 포스트 퀀텀 알고리즘 설정
-    SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); // Kyber-512 사용
-    SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    // SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); // Kyber-512 사용
+    // SSL_CTX_set1_groups_list(ctx, "dilithium2");
 
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
