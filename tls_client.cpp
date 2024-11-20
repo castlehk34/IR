@@ -10,6 +10,12 @@
 struct timeval s, e;
 struct timeval send_time, recv_time;
 
+static void error_handling(char *message){
+    fputs(message, stderr);
+    fputc('\n', stderr);
+    exit(1);
+}
+
 static SSL_CTX *create_context(){
     SSL_CTX* ctx = SSL_CTX_new(SSLv23_client_method());
     if(!ctx) error_handling("aafail to create ssl context");
