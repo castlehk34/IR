@@ -29,9 +29,9 @@
 //#include "openssl/ssl.h"
 //#include "openssl/err.h"
 
-#include "/usr/local/include/openssl/bio.h"
-#include "/usr/local/include/openssl/ssl.h"
-#include "/usr/local/include/openssl/err.h"
+#include "/home/hkseong/openssl/install/include/openssl/bio.h"
+#include "/home/hkseong/openssl/install/include/openssl/ssl.h"
+#include "/home/hkseong/openssl/install/include/openssl/err.h"
 
 //#include "../openssl/crypto.h"
 //#include <openssl/X509.h>
