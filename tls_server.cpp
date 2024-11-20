@@ -53,7 +53,7 @@ int main() {
         return EXIT_FAILURE;
     }
     
-    SSL_CTX_set_keylog_callback(ctx, keylog_callback);
+    // SSL_CTX_set_keylog_callback(ctx, keylog_callback);
     SSL_CTX_set_num_tickets(ctx, 0);    
 
     // 인증서와 개인 키가 일치하는지 확인
@@ -194,7 +194,7 @@ int main() {
     SSL_CTX_free(ctx);
 }
 
-void keylog_callback(const SSL* ssl, const char *line){
-   printf("==============================================\n");
-   printf("%s\n", line);
-}
+// void keylog_callback(const SSL* ssl, const char *line){
+//    printf("==============================================\n");
+//    printf("%s\n", line);
+// }
