@@ -96,7 +96,6 @@ int main() {
     int client_sock = accept(server_sock, NULL, NULL);
     if (client_sock < 0) {
         perror("Accept failed");
-        ERR_print_errors_fp(stderr);
     } else {
         printf("Client connected!\n");
     }
@@ -108,6 +107,8 @@ int main() {
     gettimeofday(&start, NULL);
     if (SSL_accept(ssl) <= 0) {
         printf("SSL accept failed\n");
+        printf("error/n");
+        ERR_print_errors_fp(stderr);
     } else {
         printf("SSL connection established\n");
     }
