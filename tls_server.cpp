@@ -26,7 +26,7 @@ int main() {
     // printf("5\n");
     // SSL_CTX *ctx = SSL_CTX_new(method);
     // printf("6\n");
-    SSL_CTX* ctx = SSL_CTX_new(SSLv23_server_method());
+    SSL_CTX* ctx = SSL_CTX_new(TLS_server_method());
     printf("5\n");
     SSL_CTX_set_max_proto_version(ctx, TLS1_3_VERSION);
     printf("6\n");
