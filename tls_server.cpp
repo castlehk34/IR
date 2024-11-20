@@ -96,6 +96,7 @@ int main() {
     int client_sock = accept(server_sock, NULL, NULL);
     if (client_sock < 0) {
         perror("Accept failed");
+        ERR_print_errors_fp(stderr);
     } else {
         printf("Client connected!\n");
     }
