@@ -20,7 +20,13 @@ int main() {
     SSL_load_error_strings();
     printf("4\n");
 
-
+    OSSL_PROVIDER *oqsprov = OSSL_PROVIDER_load(NULL, "oqsprovider");
+    if (oqsprov == NULL) {
+        fprintf(stderr, "Error loading OQS provider\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+    
     // TLS 서버 메서드 사용
     // const SSL_METHOD *method = TLS_server_method();
     // printf("5\n");
@@ -33,11 +39,17 @@ int main() {
     printf("SSL_CTX address: %p\n", (void *)ctx);
     
     // 포스트 퀀텀 알고리즘 설정
-    // int aa =  SSL_CTX_set_cipher_list(ctx, "OQS-dilithium2"); 
-    // printf("7: %d\n", aa);
-    // aa = SSL_CTX_set1_groups_list(ctx, "dilithium2");
-    // printf("8: %d\n", aa);
-    
+   if (SSL_CTX_set1_groups_list(ctx, "p256_dilithium2") <= 0) {
+        fprintf(stderr, "Error setting groups\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+    // 서명 알고리즘 설정
+    if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2") <= 0) {
+        fprintf(stderr, "Error setting signature algorithms\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
     
 
     // 인증서와 개인 키 파일 로드 및 유효성 검사
