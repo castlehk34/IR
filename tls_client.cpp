@@ -55,6 +55,7 @@ int main() {
     }
     printf("Kyber pass\n");
     // Dilithium2를 서명 알고리즘으로 설정
+	/*
     if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2") <= 0) {
         fprintf(stderr, "Error setting signature algorithms\n");
         ERR_print_errors_fp(stderr);
@@ -66,7 +67,8 @@ int main() {
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
-
+	*/
+		
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in addr;
