@@ -33,10 +33,10 @@ int main() {
     printf("SSL_CTX address: %p\n", (void *)ctx);
     
     // 포스트 퀀텀 알고리즘 설정
-    int aa =  SSL_CTX_set_cipher_list(ctx, "OQS-dilithium2"); 
-    printf("7: %d\n", aa);
-    aa = SSL_CTX_set1_groups_list(ctx, "dilithium2");
-    printf("8: %d\n", aa);
+    // int aa =  SSL_CTX_set_cipher_list(ctx, "OQS-dilithium2"); 
+    // printf("7: %d\n", aa);
+    // aa = SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    // printf("8: %d\n", aa);
     
     
 
