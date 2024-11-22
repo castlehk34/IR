@@ -54,6 +54,9 @@ int main() {
 
     if (connect(client_sock, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
         perror("Connect failed");
+    	close(client_sock);
+    	SSL_CTX_free(ctx);
+    	exit(EXIT_FAILURE);
     } else {
         printf("Connected to server\n");
     }
