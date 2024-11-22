@@ -26,6 +26,13 @@ int main() {
     OpenSSL_add_all_algorithms();
     SSL_load_error_strings();
 
+    OSSL_PROVIDER *oqsprov = OSSL_PROVIDER_load(NULL, "oqsprovider");
+    if (oqsprov == NULL) {
+        fprintf(stderr, "Error loading OQS provider\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+
     // TLS 클라이언트 메서드 사용
     SSL_CTX *ctx = create_context();
     printf("a\n");
@@ -39,8 +46,19 @@ int main() {
 
     
     // 포스트 퀀텀 알고리즘 설정
-    // SSL_CTX_set_cipher_list(ctx, "OQS-dilithium-2-SHA256"); // Kyber-512 사용
-    // SSL_CTX_set1_groups_list(ctx, "dilithium2");
+    // 키 교환 그룹 설정
+    if (SSL_CTX_set1_groups_list(ctx, "p256_dilithium2") <= 0) {
+        fprintf(stderr, "Error setting groups\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+
+    // 서명 알고리즘 설정
+    if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2") <= 0) {
+        fprintf(stderr, "Error setting signature algorithms\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
 
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
