@@ -53,8 +53,9 @@ int main() {
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
+    printf("Kyber pass\n");
     // Dilithium2를 서명 알고리즘으로 설정
-    if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2@oqsprovider") <= 0) {
+    if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2:provider=oqsprovider") <= 0) {
         fprintf(stderr, "Error setting signature algorithms\n");
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
