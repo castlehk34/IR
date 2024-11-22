@@ -108,15 +108,17 @@ int main() {
     printf("%d\n", ssl);
     // tls 핸드쉑 시작 시간 측정
     gettimeofday(&start, NULL);
-    printf("c\n");
+    printf("cccccccccccc\n");
     if (SSL_accept(ssl) <= 0) {
         printf("SSL accept failed\n");
+        printf("dddddddddddddddd\n");
         printf("error/n");
         ERR_print_errors_fp(stderr);
     } else {
+        printf("eeeeeeeeeeeeeee\n");
         printf("SSL connection established\n");
     }
-    printf("d\n");
+
     gettimeofday(&end, NULL);
     printf("asdf %ld, %ld\n", end.tv_sec, start.tv_sec);
     long seconds = end.tv_sec - start.tv_sec;
