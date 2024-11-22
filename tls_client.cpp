@@ -64,6 +64,7 @@ int main() {
     // SSL 객체 생성 및 연결 설정 (인증서 검증)
     SSL *ssl = SSL_new(ctx);
     SSL_set_fd(ssl, client_sock);
+    printf("%d\n",ssl);
     // 세션키 생성 및 송신
         
     // tls 핸드쉑 시작
