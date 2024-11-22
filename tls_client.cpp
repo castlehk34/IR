@@ -44,7 +44,8 @@ int main() {
 
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
-    sockaddr_in addr;
+    struck sockaddr_in addr;
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons(4433);
     inet_pton(AF_INET, "10.41.12.52", &addr.sin_addr);
