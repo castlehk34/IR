@@ -47,7 +47,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    if (SSL_CTX_use_PrivateKey_file(ctx, "dil2_privkey.key", SSL_FILETYPE_PEM) <= 0) {
+    if (SSL_CTX_use_PrivateKey_file(ctx, "dil2_privkey.pem", SSL_FILETYPE_PEM) <= 0) {
         fprintf(stderr, "Error loading private key file\n");
         ERR_print_errors_fp(stderr);
         return EXIT_FAILURE;
@@ -59,7 +59,8 @@ int main() {
     // 인증서와 개인 키가 일치하는지 확인
     if (!SSL_CTX_check_private_key(ctx)) {
         fprintf(stderr, "Private key does not match the certificate public key\n");
-        return EXIT_FAILURE;
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
     }
 
     int server_sock = socket(AF_INET, SOCK_STREAM, 0);
