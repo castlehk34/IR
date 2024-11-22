@@ -47,21 +47,24 @@ int main() {
 
     
     // 포스트 퀀텀 알고리즘 설정
-    // 키 교환 그룹 설정
-    if (SSL_CTX_set1_groups_list(ctx, "p256_dilithium2") <= 0) {
-        fprintf(stderr, "Error setting groups\n");
+    // Kyber512를 키 교환 알고리즘으로 설정
+    if (SSL_CTX_set1_groups_list(ctx, "kyber512") != 1) {
+        fprintf(stderr, "Error setting key exchange groups\n");
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
-
-    // 서명 알고리즘 설정
+    // Dilithium2를 서명 알고리즘으로 설정
     if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2") <= 0) {
         fprintf(stderr, "Error setting signature algorithms\n");
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
 
-    SSL_CTX_set_ciphersuites(ctx, "TLS_AES_256_GCM_SHA384");
+    if (SSL_CTX_set_ciphersuites(ctx, "TLS_AES_256_GCM_SHA384") != 1) {
+        fprintf(stderr, "Error setting TLS 1.3 ciphersuites\n");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
 
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
