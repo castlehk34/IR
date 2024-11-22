@@ -48,7 +48,7 @@ int main() {
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons(4433);
-    inet_pton(AF_INET, "10.41.12.52", &addr.sin_addr);
+    inet_pton(AF_INET, "10.41.12.51", &addr.sin_addr);
     // inet_pton(AF_INET, "192.168.0.2", &addr.sin_addr);
     printf("Attempting to connect to TLS server...\n");
 
