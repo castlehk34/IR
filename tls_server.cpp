@@ -111,9 +111,10 @@ int main() {
     // tls 핸드쉑 시작 시간 측정
     gettimeofday(&start, NULL);
     printf("cccccccccccc\n");
-    
-    if (SSL_accept(ssl) <= 0) {
-        int ssl_err = SSL_get_error(ssl, SSL_accept(ssl));
+
+    int ssl_accept_ret = SSL_accept(ssl);
+    if (ssl_accept_ret <= 0) {
+        int ssl_err = SSL_get_error(ssl, ssl_accept_ret);
         fprintf(stderr, "SSL_accept failed with error code: %d\n", ssl_err);
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
