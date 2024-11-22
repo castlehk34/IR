@@ -101,10 +101,13 @@ int main() {
     }
 
     // SSL 객체 생성 및 연결 설정 (핸드셰이크)
+    printf("a\n");
     SSL *ssl = SSL_new(ctx);    
+    printf("b\n");
     SSL_set_fd(ssl, client_sock);
     // tls 핸드쉑 시작 시간 측정
     gettimeofday(&start, NULL);
+    printf("c\n");
     if (SSL_accept(ssl) <= 0) {
         printf("SSL accept failed\n");
         printf("error/n");
@@ -112,6 +115,7 @@ int main() {
     } else {
         printf("SSL connection established\n");
     }
+    printf("d\n");
     gettimeofday(&end, NULL);
     printf("asdf %ld, %ld\n", end.tv_sec, start.tv_sec);
     long seconds = end.tv_sec - start.tv_sec;
