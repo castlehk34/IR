@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
+#include <openssl/provider.h>
 
 // #include <oqs/oqs.h>
 
@@ -50,6 +51,8 @@ int main() {
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
+
+    SSL_CTX_set_ciphersuites(ctx, "TLS_AES_256_GCM_SHA384");
     
 
     // 인증서와 개인 키 파일 로드 및 유효성 검사

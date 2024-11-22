@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
+#include <openssl/provider.h>
 
 // #include <oqs/oqs.h>
 
@@ -40,7 +41,7 @@ int main() {
     printf("b\n");
     SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL); // SSL_VERIFY_NONE
     printf("c\n");
-	SSL_CTX_set_min_proto_version(ctx, TLS1_3_VERSION);
+  	SSL_CTX_set_min_proto_version(ctx, TLS1_3_VERSION);
     printf("d\n");
 
 
@@ -59,6 +60,8 @@ int main() {
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
+
+    SSL_CTX_set_ciphersuites(ctx, "TLS_AES_256_GCM_SHA384");
 
     // 클라이언트 소켓 생성 및 서버에 연결
     int client_sock = socket(AF_INET, SOCK_STREAM, 0);
