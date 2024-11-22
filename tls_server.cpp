@@ -104,6 +104,7 @@ int main() {
     printf("a\n");
     SSL *ssl = SSL_new(ctx);    
     printf("b\n");
+    printf("%p\n", ssl);
     SSL_set_fd(ssl, client_sock);
     printf("%p\n", ssl);
     // tls 핸드쉑 시작 시간 측정
