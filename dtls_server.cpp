@@ -52,13 +52,13 @@ int main() {
         ERR_print_errors_fp(stderr);
         return EXIT_FAILURE;
     }
-
+   printf("7\n");
     if (SSL_CTX_use_PrivateKey_file(ctx, "server.key", SSL_FILETYPE_PEM) <= 0) {
         fprintf(stderr, "Error loading private key file\n");
         ERR_print_errors_fp(stderr);
         return EXIT_FAILURE;
     }
-
+  printf("8\n");
     // 인증서와 개인 키가 일치하는지 확인
     if (!SSL_CTX_check_private_key(ctx)) {
         fprintf(stderr, "Private key does not match the certificate public key\n");
@@ -72,41 +72,51 @@ int main() {
     getsockopt(server_sock, SOL_SOCKET, SO_RCVBUF, &actual_recv_buf_size, &optlen);
     printf("Origin buffer size: %d bytes\n", actual_recv_buf_size);
 
+printf("aa\n");
     sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(4433);
+printf("bb\n");
     addr.sin_addr.s_addr = INADDR_ANY;
     bind(server_sock, (struct sockaddr*)&addr, sizeof(addr));
+printf("cc\n");
     printf("DTLS Server started and waiting for connections...\n");
     fflush(stdout);
 
     // SSL 객체 생성 및 DTLS 연결 설정 (핸드셰이크)
+printf("dd\n");
     struct timeval bio_start, bio_end;
     gettimeofday(&bio_start, NULL);
     SSL *ssl = SSL_new(ctx);
+printf("ee\n");
     BIO *bio = BIO_new_dgram(server_sock, BIO_NOCLOSE); // DTLS용 BIO 설정
     SSL_set_bio(ssl, bio, bio);
     gettimeofday(&bio_end, NULL);
     printf("aaaa %d\n", bio_end.tv_usec - bio_start.tv_usec);
 
+printf("ssl: %p\n", ssl);
     struct sockaddr_in client_addr;
+printf("gg\n");
     socklen_t client_len = sizeof(client_addr);
+printf("client_len: %d\n", client_len);
     int received = recvfrom(server_sock, NULL, 0, MSG_PEEK, (struct sockaddr *)&client_addr, &client_len);
     if (received < 0) {
         perror("Receive failed");
         return EXIT_FAILURE;
     }
-
+printf("ii\n");
     // 클라이언트 주소 설정 및 연결 시작
     BIO_dgram_set_peer(bio, (struct sockaddr *)&client_addr);
-
+printf("jj\n");
     // DTLS 핸드셰이크 시작
+printf("SSL_accept: %d\n", SSL_accept(ssl));
     if (SSL_accept(ssl) <= 0) {
-        printf("DTLS accept failed\n");
+      printf("jjjjjj\n");  
+      printf("DTLS accept failed\n");
         ERR_print_errors_fp(stderr);
         return -1;
     }
-
+printf("kk\n");
     gettimeofday(&end, NULL);
     printf("ssss %ld, %ld\n", end.tv_sec, clienthello_received_time.tv_sec);
     long elapsed = (end.tv_sec - clienthello_received_time.tv_sec) * 1000000L

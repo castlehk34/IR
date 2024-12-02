@@ -46,6 +46,7 @@ int main() {
 
 
     
+  /*
     // 포스트 퀀텀 알고리즘 설정
     // Kyber512를 키 교환 알고리즘으로 설정
     if (SSL_CTX_set1_groups_list(ctx, "kyber512") != 1) {
@@ -54,6 +55,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
     printf("Kyber pass\n");
+  */
     // Dilithium2를 서명 알고리즘으로 설정
 	/*
     if (SSL_CTX_set1_sigalgs_list(ctx, "dilithium2") <= 0) {
